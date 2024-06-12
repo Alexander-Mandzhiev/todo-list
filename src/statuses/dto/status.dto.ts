@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString, MinLength } from "class-validator"
-import { RULE_MESSAGE, RULE_MESSAGE_LENGTH } from "src/util"
+import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString, Length } from "class-validator"
+import { STATUS_RULE_LENGTH } from "src/util"
 
 export class ProjectId {
     @ApiProperty({ description: 'Уникальный идентификатор проекта', example: "clx25gfmp00037r4g2jg2vete" })
@@ -12,7 +12,7 @@ export class ProjectId {
 export class StatusDto extends ProjectId {
     @ApiProperty({ description: 'Название статуса задачи', example: "to do" })
     @IsNotEmpty()
-    @MinLength(+RULE_MESSAGE_LENGTH, { message: RULE_MESSAGE })
+    @Length(2, 50, { message: STATUS_RULE_LENGTH })
     @IsString()
     readonly name: string
 

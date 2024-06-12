@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { IsArray, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
+import { TASK_RULE_LENGTH } from "src/util";
 
 
 export class StatusIdDto {
@@ -13,6 +14,7 @@ export class TaskDto extends StatusIdDto {
     @ApiProperty({ description: 'Название задачи', example: "to do" })
     @IsNotEmpty()
     @IsString()
+    @Length(5, 150, { message: TASK_RULE_LENGTH })
     readonly name: string
 
     @ApiProperty({ description: 'Описсание задачи', example: "Учебные материалы для ..." })
