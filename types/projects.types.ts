@@ -26,14 +26,12 @@ export class ProjectsResponse extends CreateProjectsResponse {
                     {
                         "id": "clx37pkr20001rpw4i51f3vfx",
                         "name": "Todo",
-                        "order": 0,
                         "tasks": [
                             {
                                 "id": "clx37l48q0001ckthfwhmgn5o",
                                 "createdAt": "2024-06-06T12:03:24.218Z",
                                 "name": "Сделать перерыв",
                                 "description": "Сделать перерыв описание 123",
-                                "order": 0,
                             },
                         ]
                     }
@@ -42,5 +40,4 @@ export class ProjectsResponse extends CreateProjectsResponse {
         ]
     })
     statuses: StatusesResponse[]
-
 }

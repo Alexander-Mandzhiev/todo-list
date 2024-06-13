@@ -33,10 +33,7 @@ export class StatusesService {
 
     const statuses = await this.prisma.status.findMany({
       where: { userId, projectId: projectId },
-      select: {
-        id: true, name: true, order: true,
-        tasks: { select: { id: true, createdAt: true, name: true, description: true, order: true } }
-      }
+      select: { id: true, name: true }
       , orderBy: { order: "asc" }
     })
     if (!statuses) throw new HttpException(`Произошла ошибка получения статусов проекта!`, HttpStatus.NOT_FOUND)
@@ -49,10 +46,7 @@ export class StatusesService {
 
     const status = await this.prisma.status.findUnique({
       where: { userId, id },
-      select: {
-        id: true, name: true, order: true,
-        tasks: { select: { id: true, createdAt: true, name: true, description: true, order: true } }
-      }
+      select: { id: true, name: true }
     });
     if (!status) throw new HttpException(`Произошла ошибка получения статуса проекта! Статус проекта не найден!`, HttpStatus.NOT_FOUND);
     return status
@@ -81,10 +75,9 @@ export class StatusesService {
     try {
       return await this.prisma.$transaction(
         dto.ids.map((id, order) => this.prisma.status.update({
-          where: { id, userId }, data: { order }, select: {
-            id: true, name: true, order: true,
-            tasks: { select: { id: true, createdAt: true, name: true, description: true, order: true } }
-          }
+          where: { id, userId },
+          data: { order },
+          select: { id: true, name: true },
         }))
       )
     } catch (error) {

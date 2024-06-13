@@ -28,11 +28,13 @@ export class ProjectsService {
         id: true, name: true, description: true, createdAt: true,
         statuses: {
           select: {
-            id: true, name: true, order: true,
+            id: true, name: true,
             tasks: {
-              select: { id: true, createdAt: true, name: true, description: true, order: true }
+              select: { id: true, createdAt: true, name: true, description: true },
+              orderBy: { order: 'asc' }
             }
-          }
+          },
+          orderBy: { order: 'asc' }
         }
       }
       // include: { statuses: { include: { tasks: true } } }
@@ -47,11 +49,13 @@ export class ProjectsService {
         id: true, name: true, description: true, createdAt: true,
         statuses: {
           select: {
-            id: true, name: true, order: true,
+            id: true, name: true,
             tasks: {
-              select: { id: true, createdAt: true, name: true, description: true, order: true }
+              select: { id: true, createdAt: true, name: true, description: true },
+              orderBy: { order: 'asc' }
             }
-          }
+          },
+          orderBy: { order: 'asc' }
         }
       }
     })

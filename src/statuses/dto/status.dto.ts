@@ -25,8 +25,7 @@ export class StatusDto extends ProjectId {
 export class UpdateOrderDto extends ProjectId {
     @ApiProperty({
         description: 'Порядковые номер столбца статуса задачи',
-        example: [
-            "clx31nibq00033pzz8cck5u2s"]
+        example: ["clx31nibq00033pzz8cck5u2s", "clx31ne1700013pzzcen2jla2"]
     })
     @IsOptional()
     @IsArray()

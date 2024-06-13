@@ -1,6 +1,4 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { TasksResponse } from "./tasks.types";
-
 
 export class CreateStatusesResponse {
     @ApiProperty({ description: 'Уникальный идентификатор', example: "clx3968w80001klbslniv3jwf" })
@@ -13,17 +11,26 @@ export class CreateStatusesResponse {
     order: number
 }
 
-export class StatusesResponse extends CreateStatusesResponse {
+export class StatusesResponse {
+    @ApiProperty({ description: 'Уникальный идентификатор', example: "clx3968w80001klbslniv3jwf" })
+    id: string;
+
+    @ApiProperty({ description: 'Название статуса задачи', example: "to do" })
+    name: string
+}
+
+export class UpdateOrderStatusesResponse {
     @ApiProperty({
-        description: 'Задачи относящиеся к данному статусу',
         example: [
             {
-                "id": "clx37l48q0001ckthfwhmgn5o",
-                "name": "Сделать перерыв",
-                "description": "Сделать перерыв описание 123",
-                "order": 0
+                "id": "clx31nibq00033pzz8cck5u2s",
+                "name": "First"
+            },
+            {
+                "id": "clx31ne1700013pzzcen2jla2",
+                "name": "To do"
             }
         ]
     })
-    tasks: TasksResponse[]
+    response: []
 }

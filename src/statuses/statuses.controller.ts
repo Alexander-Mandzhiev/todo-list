@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, HttpCode, 
 import { StatusesService } from './statuses.service';
 import { ProjectId, StatusDto, UpdateOrderDto } from './dto/status.dto';
 import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { CreateStatusesResponse, StatusesResponse } from 'types/statuses.types';
+import { CreateStatusesResponse, StatusesResponse, UpdateOrderStatusesResponse } from 'types/statuses.types';
 import { DeleteMessage } from 'types/IBase';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { CurrentUser } from 'src/auth/decorators/user.decorator';
@@ -37,7 +37,7 @@ export class StatusesController {
   }
 
   @ApiBody({ type: UpdateOrderDto })
-  @ApiOkResponse({ type: [StatusesResponse] })
+  @ApiOkResponse({ type: UpdateOrderStatusesResponse })
   @UsePipes(new ValidationPipe())
   @HttpCode(HttpStatus.OK)
   @Patch(`order`)

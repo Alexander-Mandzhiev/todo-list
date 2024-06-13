@@ -20,7 +20,7 @@ export class TasksService {
 
   async findAll(userId: string, statusId: string) {
     try {
-      return await this.prisma.task.findMany({ where: { userId, statusId }, select: { id: true, createdAt: true, name: true, description: true, order: true } });
+      return await this.prisma.task.findMany({ where: { userId, statusId }, select: { id: true, createdAt: true, name: true, description: true } });
     } catch (error) {
       throw new HttpException(`Произошла ошибка получения задач! ${error}`, HttpStatus.BAD_REQUEST)
     }
@@ -28,7 +28,7 @@ export class TasksService {
 
   async findOne(userId: string, statusId: string, id: string) {
     try {
-      return await this.prisma.task.findUnique({ where: { userId, id, statusId }, select: { id: true, createdAt: true, name: true, description: true, order: true } });
+      return await this.prisma.task.findUnique({ where: { userId, id, statusId }, select: { id: true, createdAt: true, name: true, description: true } });
     } catch (error) {
       throw new HttpException(`Произошла ошибка получения задачи! ${error}`, HttpStatus.BAD_REQUEST)
     }
@@ -63,7 +63,7 @@ export class TasksService {
       return await this.prisma.$transaction(
         dto.ids.map((id, order) => this.prisma.task.update({
           where: { id, userId }, data: { order },
-          select: { id: true, createdAt: true, name: true, description: true, order: true }
+          select: { id: true, createdAt: true, name: true, description: true }
         }))
       )
     } catch (error) {

@@ -4,7 +4,7 @@ import { TaskDto, UpdateOrderDto } from './dto/task.dto';
 import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentUser } from 'src/auth/decorators/user.decorator';
 import { Auth } from 'src/auth/decorators/auth.decorator';
-import { TasksResponse } from 'types/tasks.types';
+import { CreateTasksResponse, TasksResponse, UpdateOrderTasksResponse } from 'types/tasks.types';
 import { DeleteMessage } from 'types/IBase';
 
 @ApiTags('Задачи')
@@ -14,7 +14,7 @@ export class TasksController {
   constructor(private readonly tasksService: TasksService) { }
 
   @ApiBody({ type: TaskDto })
-  @ApiOkResponse({ type: TasksResponse })
+  @ApiOkResponse({ type: CreateTasksResponse })
   @UsePipes(new ValidationPipe())
   @HttpCode(HttpStatus.OK)
   @Post()
@@ -38,7 +38,7 @@ export class TasksController {
   }
 
   @ApiBody({ type: UpdateOrderDto })
-  @ApiOkResponse({ type: [TasksResponse] })
+  @ApiOkResponse({ type: UpdateOrderTasksResponse })
   @UsePipes(new ValidationPipe())
   @HttpCode(HttpStatus.OK)
   @Patch(`order`)
@@ -47,7 +47,7 @@ export class TasksController {
   }
 
   @ApiBody({ type: TaskDto })
-  @ApiOkResponse({ type: TasksResponse })
+  @ApiOkResponse({ type: CreateTasksResponse })
   @UsePipes(new ValidationPipe())
   @HttpCode(HttpStatus.OK)
   @Patch(':id')
