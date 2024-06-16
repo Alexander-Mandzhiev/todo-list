@@ -26,6 +26,7 @@ export class ProjectsService {
       where: { userId: id },
       select: {
         id: true, name: true, description: true, createdAt: true,
+        taskFields: { select: { id: true, name: true, field: true } },
         statuses: {
           select: {
             id: true, name: true,

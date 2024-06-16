@@ -4,7 +4,7 @@ import { AuthDTO } from './dto/create-auth.dto';
 import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { RefreshTokenResponse, SignInResponse } from 'types/auth.types';
 import { Request, Response } from 'express';
-import { REFRESH_TOKEN_NAME } from 'src/util';
+import { REFRESH_TOKEN_NAME } from 'src/config/util';
 
 @ApiTags('Авторизация')
 @Controller('auth')

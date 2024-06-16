@@ -18,15 +18,15 @@ export class StatusesController {
   @UsePipes(new ValidationPipe())
   @HttpCode(HttpStatus.OK)
   @Post()
-  create(@CurrentUser('id') userId: string, @Body() dto: StatusDto) {
-    return this.statusesService.create(userId, dto);
+  create(@CurrentUser('id') id: string, @Body() dto: StatusDto) {
+    return this.statusesService.create(id, dto);
   }
 
   @ApiOkResponse({ type: [StatusesResponse] })
   @HttpCode(HttpStatus.OK)
   @Get(':project_id')
-  findAll(@CurrentUser('id') userId: string, @Param('project_id') projectId: string) {
-    return this.statusesService.findAll(userId, projectId);
+  findAll(@CurrentUser('id') id: string, @Param('project_id') projectId: string) {
+    return this.statusesService.findAll(id, projectId);
   }
 
   @ApiOkResponse({ type: StatusesResponse })
@@ -41,8 +41,8 @@ export class StatusesController {
   @UsePipes(new ValidationPipe())
   @HttpCode(HttpStatus.OK)
   @Patch(`order`)
-  updateOrderStatuses(@CurrentUser('id') userId: string, @Body() dto: UpdateOrderDto) {
-    return this.statusesService.updateOrderStatuses(userId, dto);
+  updateOrderStatuses(@Body() dto: UpdateOrderDto) {
+    return this.statusesService.updateOrderStatuses(dto);
   }
 
   @ApiBody({ type: StatusDto })
@@ -50,14 +50,14 @@ export class StatusesController {
   @UsePipes(new ValidationPipe())
   @HttpCode(HttpStatus.OK)
   @Patch(':id')
-  update(@CurrentUser('id') userId: string, @Param('id') id: string, @Body() dto: StatusDto) {
-    return this.statusesService.update(userId, id, dto);
+  update(@Param('id') id: string, @Body() dto: StatusDto) {
+    return this.statusesService.update(id, dto);
   }
 
   @ApiOkResponse({ type: DeleteMessage })
   @HttpCode(HttpStatus.OK)
   @Delete(':id')
-  remove(@CurrentUser('id') userId: string, @Param('id') id: string) {
-    return this.statusesService.remove(userId, id);
+  remove(@Param('id') id: string) {
+    return this.statusesService.remove(id);
   }
 }

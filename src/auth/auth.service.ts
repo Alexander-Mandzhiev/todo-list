@@ -5,7 +5,7 @@ import { UsersService } from 'src/users/users.service';
 import { Response } from 'express';
 import { AuthResponse, AuthTokensResponse } from 'types/auth.types';
 import { User } from 'types/users.types';
-import { ACCESS_JWT_EXPIRATION_TIME, REFRESH_JWT_EXPIRATION_TIME, REFRESH_TOKEN_NAME } from 'src/util';
+import { ACCESS_JWT_EXPIRATION_TIME, REFRESH_JWT_EXPIRATION_TIME, REFRESH_TOKEN_NAME } from 'src/config/util';
 import { verify } from 'argon2';
 
 @Injectable()

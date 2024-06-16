@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsOptional, IsString, Length, Matches, MinLength } from 'class-validator';
-import { MESSAGES, REGEX } from "src/util";
+import { MESSAGES, REGEX } from "src/config/util";
 
 export class UserDto {
 

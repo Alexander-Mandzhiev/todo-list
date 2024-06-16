@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { IsArray, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
-import { TASK_RULE_LENGTH } from "src/util";
+import { TASK_RULE_LENGTH } from "src/config/util";
 
 
 export class StatusIdDto {

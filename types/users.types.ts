@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IBaseExtended } from "./IBase"
+import { IBase, IBaseExtended } from "./IBase"
 import { ProjectsResponse } from "./projects.types";
 
 export class UserResponse extends IBaseExtended {

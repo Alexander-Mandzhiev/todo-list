@@ -7,19 +7,19 @@ import { ProjectsService } from 'src/projects/projects.service';
 export class StatusesService {
   constructor(private prisma: PrismaService, private projectService: ProjectsService) { }
 
-  async findOneStatus(userId?: string, id?: string) {
-    const status = await this.prisma.status.findUnique({ where: { userId, id } });
+  async findOneStatus(id?: string) {
+    const status = await this.prisma.status.findUnique({ where: { id } });
     return status
   }
 
   async create(userId: string, dto: StatusDto) {
     try {
-      const project = await this.projectService.findOneProject(userId, dto.projectId)
-      if (!project) throw new HttpException(`Произошла ошибка! Такой проект не существует!`, HttpStatus.NOT_FOUND)
+      const existProject = await this.projectService.findOneProject(userId, dto.projectId)
+      if (!existProject) throw new HttpException(`Произошла ошибка! Такой проект не существует!`, HttpStatus.NOT_FOUND)
 
-      const count = await this.prisma.status.count({ where: { projectId: dto.projectId, userId } })
+      const count = await this.prisma.status.count({ where: { projectId: dto.projectId } })
       return await this.prisma.status.create({
-        data: { name: dto.name, order: count, projectId: dto.projectId, userId },
+        data: { name: dto.name, order: count, projectId: dto.projectId },
         select: { id: true, name: true, order: true }
       });
     } catch (error) {
@@ -28,11 +28,11 @@ export class StatusesService {
   }
 
   async findAll(userId: string, projectId: string) {
-    const project = await this.projectService.findOneProject(userId, projectId)
-    if (!project) throw new HttpException(`Произошла ошибка! Такой проект не существует!`, HttpStatus.NOT_FOUND)
+    const existProject = await this.projectService.findOneProject(userId, projectId)
+    if (!existProject) throw new HttpException(`Произошла ошибка! Такой проект не существует!`, HttpStatus.NOT_FOUND)
 
     const statuses = await this.prisma.status.findMany({
-      where: { userId, projectId: projectId },
+      where: { projectId: projectId },
       select: { id: true, name: true }
       , orderBy: { order: "asc" }
     })
@@ -41,22 +41,22 @@ export class StatusesService {
   }
 
   async findOne(userId: string, projectId: string, id: string) {
-    const project = await this.projectService.findOneProject(userId, projectId)
-    if (!project) throw new HttpException(`Произошла ошибка! Такой проект не существует!`, HttpStatus.NOT_FOUND)
+    const existProject = await this.projectService.findOneProject(userId, projectId)
+    if (!existProject) throw new HttpException(`Произошла ошибка! Такой проект не существует!`, HttpStatus.NOT_FOUND)
 
     const status = await this.prisma.status.findUnique({
-      where: { userId, id },
+      where: { id },
       select: { id: true, name: true }
     });
     if (!status) throw new HttpException(`Произошла ошибка получения статуса проекта! Статус проекта не найден!`, HttpStatus.NOT_FOUND);
     return status
   }
 
-  async update(userId: string, id: string, dto: StatusDto) {
-    const status = await this.findOneStatus(userId, id)
+  async update(id: string, dto: StatusDto) {
+    const status = await this.findOneStatus(id)
     if (!status) throw new HttpException(`Произошла ошибка обновления статуса проекта! Статус проекта не найден!`, HttpStatus.NOT_FOUND);
     return await this.prisma.status.update({
-      where: { id, userId }, data: { name: dto.name, order: dto.order, projectId: dto.projectId, userId },
+      where: { id }, data: { name: dto.name, order: dto.order, projectId: dto.projectId },
       select: {
         id: true, name: true, order: true,
         tasks: { select: { id: true, createdAt: true, name: true, description: true, order: true } }
@@ -64,18 +64,18 @@ export class StatusesService {
     });
   }
 
-  async remove(userId: string, id: string) {
-    const status = await this.findOneStatus(userId, id)
+  async remove(id: string) {
+    const status = await this.findOneStatus(id)
     if (!status) throw new HttpException(`Произошла ошибка удаления статуса проекта! Статус проекта не найден!`, HttpStatus.NOT_FOUND);
-    await this.prisma.status.delete({ where: { id, userId } });
+    await this.prisma.status.delete({ where: { id } });
     return { message: 'Статус проекта успешно удален!' };
   }
 
-  async updateOrderStatuses(userId: string, dto: UpdateOrderDto) {
+  async updateOrderStatuses(dto: UpdateOrderDto) {
     try {
       return await this.prisma.$transaction(
         dto.ids.map((id, order) => this.prisma.status.update({
-          where: { id, userId },
+          where: { id },
           data: { order },
           select: { id: true, name: true },
         }))

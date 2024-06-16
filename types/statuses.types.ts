@@ -1,9 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IBase } from "./IBase";
 
-export class CreateStatusesResponse {
-    @ApiProperty({ description: 'Уникальный идентификатор', example: "clx3968w80001klbslniv3jwf" })
-    id: string;
-
+export class CreateStatusesResponse extends IBase {
     @ApiProperty({ description: 'Название статуса задачи', example: "to do" })
     name: string
 

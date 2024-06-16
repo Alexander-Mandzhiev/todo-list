@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus
 import { TasksService } from './tasks.service';
 import { TaskDto, UpdateOrderDto } from './dto/task.dto';
 import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { CurrentUser } from 'src/auth/decorators/user.decorator';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { CreateTasksResponse, TasksResponse, UpdateOrderTasksResponse } from 'types/tasks.types';
 import { DeleteMessage } from 'types/IBase';
@@ -18,23 +17,22 @@ export class TasksController {
   @UsePipes(new ValidationPipe())
   @HttpCode(HttpStatus.OK)
   @Post()
-  @Post()
-  create(@CurrentUser('id') userId: string, @Body() dto: TaskDto) {
-    return this.tasksService.create(userId, dto);
+  create(@Body() dto: TaskDto) {
+    return this.tasksService.create(dto);
   }
 
   @ApiOkResponse({ type: [TasksResponse] })
   @HttpCode(HttpStatus.OK)
   @Get(':status_id')
-  findAll(@CurrentUser('id') userId: string, @Param('status_id') statusId: string) {
-    return this.tasksService.findAll(userId, statusId);
+  findAll(@Param('status_id') statusId: string) {
+    return this.tasksService.findAll(statusId);
   }
 
   @ApiOkResponse({ type: TasksResponse })
   @HttpCode(HttpStatus.OK)
   @Get(':status_id/:id')
-  findOne(@CurrentUser('id') userId: string, @Param('status_id') statusId: string, @Param('id') id: string) {
-    return this.tasksService.findOne(userId, statusId, id);
+  findOne(@Param('status_id') statusId: string, @Param('id') id: string) {
+    return this.tasksService.findOne(statusId, id);
   }
 
   @ApiBody({ type: UpdateOrderDto })
@@ -42,8 +40,8 @@ export class TasksController {
   @UsePipes(new ValidationPipe())
   @HttpCode(HttpStatus.OK)
   @Patch(`order`)
-  updateOrderStatuses(@CurrentUser('id') userId: string, @Body() dto: UpdateOrderDto) {
-    return this.tasksService.updateOrderTasks(userId, dto);
+  updateOrderStatuses(@Body() dto: UpdateOrderDto) {
+    return this.tasksService.updateOrderTasks(dto);
   }
 
   @ApiBody({ type: TaskDto })
@@ -51,14 +49,14 @@ export class TasksController {
   @UsePipes(new ValidationPipe())
   @HttpCode(HttpStatus.OK)
   @Patch(':id')
-  update(@CurrentUser('id') userId: string, @Param('id') id: string, @Body() dto: TaskDto) {
-    return this.tasksService.update(userId, id, dto);
+  update(@Param('id') id: string, @Body() dto: TaskDto) {
+    return this.tasksService.update(id, dto);
   }
 
   @ApiOkResponse({ type: DeleteMessage })
   @HttpCode(HttpStatus.OK)
   @Delete(':id')
-  remove(@CurrentUser('id') userId: string, @Param('id') id: string) {
-    return this.tasksService.remove(userId, id);
+  remove(@Param('id') id: string) {
+    return this.tasksService.remove(id);
   }
 }

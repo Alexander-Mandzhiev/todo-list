@@ -1,9 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IBase } from "./IBase";
+import { IBaseExtended } from "./IBase";
 import { StatusesResponse } from "./statuses.types";
 
 
-export class CreateProjectsResponse extends IBase {
+export class CreateProjectsResponse extends IBaseExtended {
     @ApiProperty({ description: 'Название проекта', example: "Учёба" })
     name: string
 

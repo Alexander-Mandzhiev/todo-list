@@ -5,6 +5,8 @@ import { ProjectsModule } from './projects/projects.module';
 import { StatusesModule } from './statuses/statuses.module';
 import { TasksModule } from './tasks/tasks.module';
 import { AuthModule } from './auth/auth.module';
+import { TaskFieldsModule } from './task-fields/task-fields.module';
+import { TaskFieldValuesModule } from './task-field-values/task-field-values.module';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { AuthModule } from './auth/auth.module';
     StatusesModule,
     TasksModule,
     AuthModule,
+    TaskFieldsModule,
+    TaskFieldValuesModule,
   ],
   controllers: [],
   providers: [],
