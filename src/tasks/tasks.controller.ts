@@ -45,7 +45,7 @@ export class TasksController {
   }
 
   @ApiBody({ type: TaskDto })
-  @ApiOkResponse({ type: CreateTasksResponse })
+  @ApiOkResponse({ type: TasksResponse })
   @UsePipes(new ValidationPipe())
   @HttpCode(HttpStatus.OK)
   @Patch(':id')

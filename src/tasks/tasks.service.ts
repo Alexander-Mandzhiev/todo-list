@@ -24,7 +24,8 @@ export class TasksService {
         select: {
           id: true, createdAt: true, name: true, description: true, order: true,
           taskIntValues: { select: { value: true, taskFieldId: true } },
-          taskStrValues: { select: { value: true, taskFieldId: true } }
+          taskStrValues: { select: { value: true, taskFieldId: true } },
+          taskEnumValues: { select: { taskFieldId: true, taskEnumId: true } }
         }
       });
     } catch (error) {
@@ -34,13 +35,15 @@ export class TasksService {
 
   async findAll(statusId: string) {
     try {
-      return await this.prisma.task.findMany({
+      const tasks = await this.prisma.task.findMany({
         where: { statusId }, select: {
           id: true, createdAt: true, name: true, description: true,
           taskIntValues: { select: { value: true, taskFieldId: true } },
-          taskStrValues: { select: { value: true, taskFieldId: true } }
+          taskStrValues: { select: { value: true, taskFieldId: true } },
+          taskEnumValues: { select: { taskEnumId: true, taskFieldId: true } }
         }
       });
+      return tasks
     } catch (error) {
       throw new HttpException(`Произошла ошибка получения задач! ${error}`, HttpStatus.BAD_REQUEST)
     }
@@ -52,7 +55,8 @@ export class TasksService {
         where: { id, statusId }, select: {
           id: true, createdAt: true, name: true, description: true,
           taskIntValues: { select: { value: true, taskFieldId: true } },
-          taskStrValues: { select: { value: true, taskFieldId: true } }
+          taskStrValues: { select: { value: true, taskFieldId: true } },
+          taskEnumValues: { select: { taskFieldId: true, taskEnumId: true } }
         }
       });
     } catch (error) {
@@ -69,7 +73,8 @@ export class TasksService {
         select: {
           id: true, createdAt: true, name: true, description: true, order: true,
           taskIntValues: { select: { value: true, taskFieldId: true } },
-          taskStrValues: { select: { value: true, taskFieldId: true } }
+          taskStrValues: { select: { value: true, taskFieldId: true } },
+          taskEnumValues: { select: { taskFieldId: true, taskEnumId: true } }
         }
       })
     } catch (error) {
@@ -96,7 +101,8 @@ export class TasksService {
           select: {
             id: true, createdAt: true, name: true, description: true,
             taskIntValues: { select: { value: true, taskFieldId: true } },
-            taskStrValues: { select: { value: true, taskFieldId: true } }
+            taskStrValues: { select: { value: true, taskFieldId: true } },
+            taskEnumValues: { select: { taskFieldId: true, taskEnumId: true } }
           }
         }))
       )

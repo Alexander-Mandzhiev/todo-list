@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { TaskFieldValueDto } from './dto/task-field-value.dto';
+import { EnumValuesDto, TaskFieldValueDto } from './dto/task-field-value.dto';
 import { PrismaService } from 'src/prisma.service';
 import { TaskFieldsService } from 'src/task-fields/task-fields.service';
 import { TasksService } from 'src/tasks/tasks.service';
@@ -20,6 +20,11 @@ export class TaskFieldValuesService {
       if (field === 'string' && typeof dto.value === 'string') {
         return await this.prisma.taskStrValues.create({
           data: { value: dto.value, taskFieldId: dto.taskFieldId, taskId: dto.taskId },
+        });
+      }
+      if (field === 'enum' && typeof dto.value === 'string') {
+        return await this.prisma.taskEnumValues.create({
+          data: { taskEnumId: dto.value, taskFieldId: dto.taskFieldId, taskId: dto.taskId },
         });
       }
       return { message: `Проверьте правильность отправляемых данных!` }
@@ -46,9 +51,26 @@ export class TaskFieldValuesService {
           data: { value: dto.value, taskFieldId: dto.taskFieldId, taskId: dto.taskId },
         });
       }
+      if (existTaskField.field === 'enum' && typeof dto.value === 'string') {
+        return await this.prisma.taskEnumValues.update({
+          where: { task_enum_value_id: { taskFieldId: existTaskField.id, taskId: existTask.id } },
+          data: { taskEnumId: dto.value, taskFieldId: dto.taskFieldId, taskId: dto.taskId },
+        });
+      }
       return { message: `Проверьте правильность отправляемых данных!` }
     } catch (error) {
       throw new HttpException(`Произошла ошибка создания значения поля задачи! ${error}`, HttpStatus.FORBIDDEN)
+    }
+  }
+
+  async createEnumValueList(dto: EnumValuesDto) {
+    try {
+      const valuesEnum = dto.values.split(',')
+      return await this.prisma.$transaction(
+        valuesEnum.map((item) => this.prisma.taskFieldsEnumValue.create({ data: { name: item, taskFieldId: dto.taskFieldId } }))
+      )
+    } catch (error) {
+      throw new HttpException(`Произошла ошибка создания значения для списка поля задачи! ${error}`, HttpStatus.FORBIDDEN)
     }
   }
 }

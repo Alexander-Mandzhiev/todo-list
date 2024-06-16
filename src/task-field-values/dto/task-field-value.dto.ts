@@ -21,3 +21,15 @@ export class TaskFieldValueDto {
     taskId: string
 }
 
+
+export class EnumValuesDto {
+    @ApiProperty({ description: 'Список значений', example: "Низкий,Средний,Высокий" })
+    @IsNotEmpty()
+    @IsString()
+    values: string
+
+    @ApiProperty({ description: 'Уникальный идентификатор на поле задачи', example: "clxhf60d40007et0jhbcil2vm" })
+    @IsNotEmpty()
+    @IsString()
+    taskFieldId: string
+}

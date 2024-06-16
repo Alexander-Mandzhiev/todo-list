@@ -1,12 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { IBaseExtended } from "./IBase"
-import { ResponseTaskIntValues, ResponseTaskStrValues } from "./projectFields.types"
+import { ResponseCreateEnumValues, ResponseTaskIntValues, ResponseTaskStrValues } from "./projectFields.types"
 
 export class CreateTasksResponse extends IBaseExtended {
     @ApiProperty({ description: 'Название задачи', example: "to do" })
     name: string
 
-    @ApiProperty({ description: 'Описсание задачи', example: "Учебные материалы для ..." })
+    @ApiProperty({ description: 'Описсание задачи', example: "Какое-то описание ..." })
     description: string
 
     @ApiProperty({ description: 'Порядковые номер задачи', example: "1" })
@@ -17,7 +17,7 @@ export class TasksResponse extends IBaseExtended {
     @ApiProperty({ description: 'Название задачи', example: "to do" })
     name: string
 
-    @ApiProperty({ description: 'Описсание задачи', example: "Учебные материалы для ..." })
+    @ApiProperty({ description: 'Описсание задачи', example: "Какое-то описание ..." })
     description: string
 
     @ApiProperty({
@@ -35,6 +35,14 @@ export class TasksResponse extends IBaseExtended {
         }]
     })
     taskIntValues: ResponseTaskIntValues
+
+    @ApiProperty({
+        example: [{
+            "taskEnumId": "clxhf653e000bet0j99tnjpv8",
+            "taskFieldId": "clxhf60d40007et0jhbcil2vm"
+        }]
+    })
+    taskEnumValues: ResponseCreateEnumValues
 }
 
 export class UpdateOrderTasksResponse {
@@ -56,6 +64,12 @@ export class UpdateOrderTasksResponse {
                         "value": "Петр",
                         "taskFieldId": "clxfx7ljv0001i7zd2toarvak"
                     }
+                ],
+                "taskEnumValues": [
+                    {
+                        "taskFieldId": "clxhf60d40007et0jhbcil2vm",
+                        "taskEnumId": "clxhf653e000bet0j99tnjpv8"
+                    }
                 ]
             },
             {
@@ -64,7 +78,8 @@ export class UpdateOrderTasksResponse {
                 "name": "Сделать перерыв",
                 "description": "Сделать перерыв описание 123",
                 "taskIntValues": [],
-                "taskStrValues": []
+                "taskStrValues": [],
+                "taskEnumValues": []
             }
         ]
     })

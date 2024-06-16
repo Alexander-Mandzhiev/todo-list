@@ -26,7 +26,14 @@ export class ProjectsService {
       where: { userId: id },
       select: {
         id: true, name: true, description: true, createdAt: true,
-        taskFields: { select: { id: true, name: true, field: true } },
+        taskFields: {
+          select: {
+            id: true, name: true, field: true,
+            taskFieldsEnumValue: { select: { id: true, name: true, taskEnumValues: { select: { taskEnumId: true } } } },
+            taskIntValues: { select: { value: true, taskFieldId: true, taskId: true } },
+            taskStrValues: { select: { value: true, taskFieldId: true, taskId: true } }
+          }
+        },
         statuses: {
           select: {
             id: true, name: true,
@@ -36,9 +43,9 @@ export class ProjectsService {
             }
           },
           orderBy: { order: 'asc' }
-        }
+        },
       }
-      // include: { statuses: { include: { tasks: true } } }
+
     });
     if (!project) throw new HttpException(`Произошла ошибка получения проектов!`, HttpStatus.NOT_FOUND)
     return project
@@ -48,6 +55,14 @@ export class ProjectsService {
     const project = await this.prisma.project.findUnique({
       where: { userId, id }, select: {
         id: true, name: true, description: true, createdAt: true,
+        taskFields: {
+          select: {
+            id: true, name: true, field: true,
+            taskFieldsEnumValue: { select: { id: true, name: true, taskEnumValues: { select: { taskEnumId: true } } } },
+            taskIntValues: { select: { value: true, taskFieldId: true, taskId: true } },
+            taskStrValues: { select: { value: true, taskFieldId: true, taskId: true } }
+          }
+        },
         statuses: {
           select: {
             id: true, name: true,
@@ -57,7 +72,7 @@ export class ProjectsService {
             }
           },
           orderBy: { order: 'asc' }
-        }
+        },
       }
     })
     if (!project) throw new HttpException(`Произошла ошибка получения проекта!`, HttpStatus.NOT_FOUND)
@@ -76,6 +91,14 @@ export class ProjectsService {
             tasks: {
               select: { id: true, createdAt: true, name: true, description: true, order: true }
             }
+          }
+        },
+        taskFields: {
+          select: {
+            id: true, name: true, field: true,
+            taskFieldsEnumValue: { select: { id: true, name: true, taskEnumValues: { select: { taskEnumId: true } } } },
+            taskIntValues: { select: { value: true, taskFieldId: true, taskId: true } },
+            taskStrValues: { select: { value: true, taskFieldId: true, taskId: true } }
           }
         }
       }

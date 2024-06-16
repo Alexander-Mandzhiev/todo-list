@@ -21,12 +21,36 @@ export class ProjectFieldsResponse {
             {
                 "id": "clxfvplou0001lbfs22szxu7v",
                 "name": "Время выполнения",
-                "field": "integer"
+                "field": "integer",
+                "taskFieldsEnumValue": []
             },
             {
                 "id": "clxfx7ljv0001i7zd2toarvak",
                 "name": "Исполнитель",
-                "field": "string"
+                "field": "string",
+                "taskFieldsEnumValue": []
+            },
+            {
+                "id": "clxhf60d40007et0jhbcil2vm",
+                "name": "Приоритет",
+                "field": "enum",
+                "taskFieldsEnumValue": [
+                    {
+                        "id": "clxhf653e0009et0jkw8e4sdu",
+                        "name": "Низкий",
+                        "taskFieldId": "clxhf60d40007et0jhbcil2vm"
+                    },
+                    {
+                        "id": "clxhf653e000bet0j99tnjpv8",
+                        "name": "Средний",
+                        "taskFieldId": "clxhf60d40007et0jhbcil2vm"
+                    },
+                    {
+                        "id": "clxhf653f000det0j881ktsap",
+                        "name": "Высокий",
+                        "taskFieldId": "clxhf60d40007et0jhbcil2vm"
+                    }
+                ]
             }
         ]
 
@@ -55,4 +79,35 @@ export class ResponseTaskStrValues {
     value: string
     @ApiProperty({ description: 'Уникальный идентификатор на поле задачи', example: "clxfvplou0001lbfs22szxu7v" })
     taskFieldId: string
+}
+
+export class ResponseCreateEnumValues extends IBase {
+    @ApiProperty({ description: 'Название поля задачи', example: "Средний" })
+    name: string
+    @ApiProperty({ description: 'Уникальный идентификатор на поле задачи', example: "clxfvplou0001lbfs22szxu7v" })
+    taskFieldId: string
+}
+
+export class ResponseEnum {
+    @ApiProperty({
+        example: [
+            {
+                "id": "clxhf653e0009et0jkw8e4sdu",
+                "name": "Низкий",
+                "taskFieldId": "clxhf60d40007et0jhbcil2vm"
+            },
+            {
+                "id": "clxhf653e000bet0j99tnjpv8",
+                "name": "Средний",
+                "taskFieldId": "clxhf60d40007et0jhbcil2vm"
+            },
+            {
+                "id": "clxhf653f000det0j881ktsap",
+                "name": "Высокий",
+                "taskFieldId": "clxhf60d40007et0jhbcil2vm"
+            }
+        ]
+    })
+    response: ResponseCreateEnumValues[]
+
 }

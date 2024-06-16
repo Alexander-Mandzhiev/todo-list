@@ -33,7 +33,10 @@ export class TaskFieldsService {
 
       const taskFields = await this.prisma.taskFields.findMany({
         where: { projectId: projectId },
-        select: { id: true, name: true, field: true }
+        select: {
+          id: true, name: true, field: true,
+          taskFieldsEnumValue: { select: { id: true, name: true, taskFieldId: true } },
+        }
       })
       return taskFields
     } catch (error) {

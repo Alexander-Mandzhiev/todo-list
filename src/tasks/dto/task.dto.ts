@@ -17,7 +17,7 @@ export class TaskDto extends StatusIdDto {
     @Length(5, 150, { message: TASK_RULE_LENGTH })
     readonly name: string
 
-    @ApiProperty({ description: 'Описсание задачи', example: "Учебные материалы для ..." })
+    @ApiProperty({ description: 'Описсание задачи', example: "Какое-то описание ..." })
     @IsOptional()
     @IsString()
     readonly description?: string
