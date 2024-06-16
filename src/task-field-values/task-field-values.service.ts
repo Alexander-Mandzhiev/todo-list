@@ -23,8 +23,9 @@ export class TaskFieldValuesService {
         });
       }
       if (field === 'enum' && typeof dto.value === 'string') {
+        const { name } = await this.prisma.taskFieldsEnumValue.findUnique({ where: { id: dto.value } })
         return await this.prisma.taskEnumValues.create({
-          data: { taskEnumId: dto.value, taskFieldId: dto.taskFieldId, taskId: dto.taskId },
+          data: { value: name, taskFieldId: dto.taskFieldId, taskId: dto.taskId },
         });
       }
       return { message: `Проверьте правильность отправляемых данных!` }
@@ -38,25 +39,31 @@ export class TaskFieldValuesService {
     try {
       const existTaskField = await this.taskFieldsService.findOne(dto.taskFieldId)
       const existTask = await this.tasksService.findOneById(dto.taskId)
+
       if (!existTaskField || !existTask) throw new HttpException(`Произошла ошибка создания значения поля задачи! Поле задачи или задача отсутствуют!`, HttpStatus.BAD_REQUEST)
+
       if (existTaskField.field === 'integer' && typeof dto.value === 'number') {
         return await this.prisma.taskIntValues.update({
           where: { task_int_value_id: { taskFieldId: existTaskField.id, taskId: existTask.id } },
           data: { value: dto.value, taskFieldId: dto.taskFieldId, taskId: dto.taskId },
         });
       }
+
       if (existTaskField.field === 'string' && typeof dto.value === 'string') {
         return await this.prisma.taskStrValues.update({
           where: { task_str_value_id: { taskFieldId: existTaskField.id, taskId: existTask.id } },
           data: { value: dto.value, taskFieldId: dto.taskFieldId, taskId: dto.taskId },
         });
       }
+
       if (existTaskField.field === 'enum' && typeof dto.value === 'string') {
+        const { name } = await this.prisma.taskFieldsEnumValue.findUnique({ where: { id: dto.value } })
         return await this.prisma.taskEnumValues.update({
           where: { task_enum_value_id: { taskFieldId: existTaskField.id, taskId: existTask.id } },
-          data: { taskEnumId: dto.value, taskFieldId: dto.taskFieldId, taskId: dto.taskId },
+          data: { value: name, taskFieldId: dto.taskFieldId, taskId: dto.taskId },
         });
       }
+
       return { message: `Проверьте правильность отправляемых данных!` }
     } catch (error) {
       throw new HttpException(`Произошла ошибка создания значения поля задачи! ${error}`, HttpStatus.FORBIDDEN)

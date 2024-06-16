@@ -37,10 +37,10 @@ export class TasksResponse extends IBaseExtended {
     taskIntValues: ResponseTaskIntValues
 
     @ApiProperty({
-        example: [{
-            "taskEnumId": "clxhf653e000bet0j99tnjpv8",
-            "taskFieldId": "clxhf60d40007et0jhbcil2vm"
-        }]
+        example: {
+            "value": "Средний",
+            "taskFieldId": "clxhltfdv0008cbz4oh8opvqa"
+        }
     })
     taskEnumValues: ResponseCreateEnumValues
 }
@@ -67,8 +67,8 @@ export class UpdateOrderTasksResponse {
                 ],
                 "taskEnumValues": [
                     {
-                        "taskFieldId": "clxhf60d40007et0jhbcil2vm",
-                        "taskEnumId": "clxhf653e000bet0j99tnjpv8"
+                        "value": "Средний",
+                        "taskFieldId": "clxhltfdv0008cbz4oh8opvqa"
                     }
                 ]
             },

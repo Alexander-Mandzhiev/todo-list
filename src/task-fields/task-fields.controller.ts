@@ -29,7 +29,6 @@ export class TaskFieldsController {
     return this.taskFieldsService.findAll(userId, projectId);
   }
 
-
   @ApiBody({ type: UpdateTaskFieldDto })
   @ApiOkResponse({ type: CreateProjectFieldResponse })
   @UsePipes(new ValidationPipe())

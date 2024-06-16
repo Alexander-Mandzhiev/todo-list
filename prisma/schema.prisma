@@ -69,20 +69,28 @@ model TaskFields {
   project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
   taskFieldsEnumValue TaskFieldsEnumValue[]
-
-  taskIntValues  TaskIntValues[]
-  taskStrValues  TaskStrValues[]
-  taskEnumValues TaskEnumValues[]
+  taskIntValues       TaskIntValues[]
+  taskStrValues       TaskStrValues[]
+  TaskEnumValues      TaskEnumValues[]
 
   @@map("task_fields")
 }
 
 model TaskFieldsEnumValue {
-  id             String           @id @unique @default(cuid())
-  name           String
-  taskFieldId    String
-  taskField      TaskFields       @relation(fields: [taskFieldId], references: [id], onDelete: Cascade)
-  taskEnumValues TaskEnumValues[]
+  id          String     @id @unique @default(cuid())
+  name        String
+  taskFieldId String
+  taskField   TaskFields @relation(fields: [taskFieldId], references: [id], onDelete: Cascade)
+}
+
+model TaskEnumValues {
+  value       String     @db.VarChar(150)
+  taskFieldId String
+  taskId      String
+  taskField   TaskFields @relation(fields: [taskFieldId], references: [id], onDelete: Cascade)
+  task        Task       @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@id(name: "task_enum_value_id", [taskFieldId, taskId])
 }
 
 model TaskIntValues {
@@ -105,17 +113,6 @@ model TaskStrValues {
   task        Task       @relation(fields: [taskId], references: [id], onDelete: Cascade)
 
   @@id(name: "task_str_value_id", [taskFieldId, taskId])
-}
-
-model TaskEnumValues {
-  taskEnumId          String
-  taskFieldsEnumValue TaskFieldsEnumValue @relation(fields: [taskEnumId], references: [id], onDelete: Cascade)
-  taskFieldId         String
-  taskFields          TaskFields          @relation(fields: [taskFieldId], references: [id], onDelete: Cascade)
-  taskId              String
-  task                Task                @relation(fields: [taskId], references: [id], onDelete: Cascade)
-
-  @@id(name: "task_enum_value_id", [taskFieldId, taskId])
 }
 
 enum TypeField {

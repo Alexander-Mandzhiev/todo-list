@@ -19,41 +19,21 @@ export class ProjectFieldsResponse {
     @ApiProperty({
         example: [
             {
-                "id": "clxfvplou0001lbfs22szxu7v",
-                "name": "Время выполнения",
-                "field": "integer",
-                "taskFieldsEnumValue": []
-            },
-            {
-                "id": "clxfx7ljv0001i7zd2toarvak",
-                "name": "Исполнитель",
-                "field": "string",
-                "taskFieldsEnumValue": []
-            },
-            {
-                "id": "clxhf60d40007et0jhbcil2vm",
+                "id": "clxhltfdv0008cbz4oh8opvqa",
                 "name": "Приоритет",
-                "field": "enum",
-                "taskFieldsEnumValue": [
-                    {
-                        "id": "clxhf653e0009et0jkw8e4sdu",
-                        "name": "Низкий",
-                        "taskFieldId": "clxhf60d40007et0jhbcil2vm"
-                    },
-                    {
-                        "id": "clxhf653e000bet0j99tnjpv8",
-                        "name": "Средний",
-                        "taskFieldId": "clxhf60d40007et0jhbcil2vm"
-                    },
-                    {
-                        "id": "clxhf653f000det0j881ktsap",
-                        "name": "Высокий",
-                        "taskFieldId": "clxhf60d40007et0jhbcil2vm"
-                    }
-                ]
+                "field": "enum"
+            },
+            {
+                "id": "clxhlvanr000gcbz47ag7fv4d",
+                "name": "Исполнитель",
+                "field": "string"
+            },
+            {
+                "id": "clxhlvrzq000icbz4n91byakc",
+                "name": "Время выполнения",
+                "field": "integer"
             }
         ]
-
     })
     response: [CreateProjectFieldResponse]
 }

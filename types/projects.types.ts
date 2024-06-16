@@ -4,10 +4,10 @@ import { StatusesResponse } from "./statuses.types";
 
 
 export class CreateProjectsResponse extends IBaseExtended {
-    @ApiProperty({ description: 'Название проекта', example: "Учёба" })
+    @ApiProperty({ description: 'Название проекта', example: "Project 1" })
     name: string
 
-    @ApiProperty({ description: 'Описсание проекта', example: "Учебные материалы для ..." })
+    @ApiProperty({ description: 'Описсание проекта', example: "1 проект - описание" })
     description: string
 
     @ApiProperty({ description: 'Уникальный идентификатор пользователя', example: "clx22fhxz0000frhk7ibh7o3o" })
@@ -18,79 +18,54 @@ export class ProjectsResponse extends CreateProjectsResponse {
     @ApiProperty({
         description: 'Имя пользователя', example: [
             {
-                "id": "clx3968w80001klbslniv3jwf",
-                "createdAt": "2024-06-06T12:47:49.640Z",
-                "name": "1 проект",
+                "id": "clxhlnbem0002cbz4mma242r4",
+                "name": "Project 1",
                 "description": "1 проект - описание",
+                "createdAt": "2024-06-16T13:45:47.902Z",
                 "taskFields": [
                     {
-                        "id": "clxfvplou0001lbfs22szxu7v",
-                        "name": "Время выполнения",
-                        "field": "integer",
-                        "taskFieldsEnumValue": [],
-                        "taskIntValues": [
-                            {
-                                "value": 2,
-                                "taskFieldId": "clxfvplou0001lbfs22szxu7v",
-                                "taskId": "clxc46zrl00016z0jral1rjan"
-                            }
-                        ],
-                        "taskStrValues": []
-                    },
-                    {
-                        "id": "clxfx7ljv0001i7zd2toarvak",
-                        "name": "Исполнитель",
-                        "field": "string",
-                        "taskFieldsEnumValue": [],
-                        "taskIntValues": [],
-                        "taskStrValues": [
-                            {
-                                "value": "Петр",
-                                "taskFieldId": "clxfx7ljv0001i7zd2toarvak",
-                                "taskId": "clxc46zrl00016z0jral1rjan"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "clxhf60d40007et0jhbcil2vm",
+                        "id": "clxhltfdv0008cbz4oh8opvqa",
                         "name": "Приоритет",
                         "field": "enum",
                         "taskFieldsEnumValue": [
                             {
-                                "id": "clxhf653e0009et0jkw8e4sdu",
-                                "name": "Низкий",
-                                "taskEnumValues": []
+                                "id": "clxhltvih000acbz47su317y7",
+                                "name": "Низкий"
                             },
                             {
-                                "id": "clxhf653e000bet0j99tnjpv8",
-                                "name": "Средний",
-                                "taskEnumValues": [
-                                    {
-                                        "taskEnumId": "clxhf653e000bet0j99tnjpv8"
-                                    }
-                                ]
+                                "id": "clxhltvih000ccbz4obpph8oa",
+                                "name": "Средний"
                             },
                             {
-                                "id": "clxhf653f000det0j881ktsap",
-                                "name": "Высокий",
-                                "taskEnumValues": []
+                                "id": "clxhltvih000ecbz4jxb6e6el",
+                                "name": "Высокий"
                             }
-                        ],
-                        "taskIntValues": [],
-                        "taskStrValues": []
+                        ]
+                    },
+                    {
+                        "id": "clxhlvanr000gcbz47ag7fv4d",
+                        "name": "Исполнитель",
+                        "field": "string",
+                        "taskFieldsEnumValue": []
+                    },
+                    {
+                        "id": "clxhlvrzq000icbz4n91byakc",
+                        "name": "Время выполнения",
+                        "field": "integer",
+                        "taskFieldsEnumValue": []
                     }
                 ],
                 "statuses": [
                     {
-                        "id": "clx37pkr20001rpw4i51f3vfx",
-                        "name": "Todo",
+                        "id": "clxhlopca0004cbz468d6bcsw",
+                        "name": "in process",
                         "tasks": [
                             {
-                                "id": "clx37l48q0001ckthfwhmgn5o",
-                                "createdAt": "2024-06-06T12:03:24.218Z",
-                                "name": "Сделать перерыв",
-                                "description": "Сделать перерыв описание 123",
-                            },
+                                "id": "clxhlqasy0006cbz4m0xeujoe",
+                                "createdAt": "2024-06-16T13:48:07.090Z",
+                                "name": "Сделать Todo list",
+                                "description": "Сделать Todo list - петпроект, стажировка"
+                            }
                         ]
                     }
                 ]

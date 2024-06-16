@@ -1,12 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { IsNotEmpty, IsString, Validate } from "class-validator"
+import { IsNotEmpty, IsOptional, IsString, Validate } from "class-validator"
 import { IsNumberOrString } from "src/config/validation"
 
 
 
 export class TaskFieldValueDto {
     @ApiProperty({ description: 'Значение поля задачи', example: "Исполнитель" })
-    @IsNotEmpty()
+    @IsOptional()
     @Validate(IsNumberOrString)
     value: number | string
 

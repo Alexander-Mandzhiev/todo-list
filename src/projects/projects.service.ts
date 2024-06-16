@@ -29,9 +29,7 @@ export class ProjectsService {
         taskFields: {
           select: {
             id: true, name: true, field: true,
-            taskFieldsEnumValue: { select: { id: true, name: true, taskEnumValues: { select: { taskEnumId: true } } } },
-            taskIntValues: { select: { value: true, taskFieldId: true, taskId: true } },
-            taskStrValues: { select: { value: true, taskFieldId: true, taskId: true } }
+            taskFieldsEnumValue: { select: { id: true, name: true } },
           }
         },
         statuses: {
@@ -58,9 +56,6 @@ export class ProjectsService {
         taskFields: {
           select: {
             id: true, name: true, field: true,
-            taskFieldsEnumValue: { select: { id: true, name: true, taskEnumValues: { select: { taskEnumId: true } } } },
-            taskIntValues: { select: { value: true, taskFieldId: true, taskId: true } },
-            taskStrValues: { select: { value: true, taskFieldId: true, taskId: true } }
           }
         },
         statuses: {
@@ -96,7 +91,7 @@ export class ProjectsService {
         taskFields: {
           select: {
             id: true, name: true, field: true,
-            taskFieldsEnumValue: { select: { id: true, name: true, taskEnumValues: { select: { taskEnumId: true } } } },
+            taskFieldsEnumValue: { select: { id: true, name: true } },
             taskIntValues: { select: { value: true, taskFieldId: true, taskId: true } },
             taskStrValues: { select: { value: true, taskFieldId: true, taskId: true } }
           }

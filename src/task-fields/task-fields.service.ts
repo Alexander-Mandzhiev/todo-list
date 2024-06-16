@@ -34,8 +34,7 @@ export class TaskFieldsService {
       const taskFields = await this.prisma.taskFields.findMany({
         where: { projectId: projectId },
         select: {
-          id: true, name: true, field: true,
-          taskFieldsEnumValue: { select: { id: true, name: true, taskFieldId: true } },
+          id: true, name: true, field: true
         }
       })
       return taskFields
@@ -43,7 +42,6 @@ export class TaskFieldsService {
       throw new HttpException(`Произошла ошибка получения полей проекта!`, HttpStatus.BAD_REQUEST)
     }
   }
-
 
   async update(id: string, dto: UpdateTaskFieldDto) {
     try {

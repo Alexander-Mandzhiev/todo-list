@@ -25,7 +25,7 @@ export class TasksService {
           id: true, createdAt: true, name: true, description: true, order: true,
           taskIntValues: { select: { value: true, taskFieldId: true } },
           taskStrValues: { select: { value: true, taskFieldId: true } },
-          taskEnumValues: { select: { taskFieldId: true, taskEnumId: true } }
+          taskEnumValues: { select: { value: true, taskFieldId: true } }
         }
       });
     } catch (error) {
@@ -40,7 +40,7 @@ export class TasksService {
           id: true, createdAt: true, name: true, description: true,
           taskIntValues: { select: { value: true, taskFieldId: true } },
           taskStrValues: { select: { value: true, taskFieldId: true } },
-          taskEnumValues: { select: { taskEnumId: true, taskFieldId: true } }
+          taskEnumValues: { select: { value: true, taskFieldId: true } }
         }
       });
       return tasks
@@ -56,7 +56,7 @@ export class TasksService {
           id: true, createdAt: true, name: true, description: true,
           taskIntValues: { select: { value: true, taskFieldId: true } },
           taskStrValues: { select: { value: true, taskFieldId: true } },
-          taskEnumValues: { select: { taskFieldId: true, taskEnumId: true } }
+          taskEnumValues: { select: { value: true, taskFieldId: true } }
         }
       });
     } catch (error) {
@@ -74,7 +74,7 @@ export class TasksService {
           id: true, createdAt: true, name: true, description: true, order: true,
           taskIntValues: { select: { value: true, taskFieldId: true } },
           taskStrValues: { select: { value: true, taskFieldId: true } },
-          taskEnumValues: { select: { taskFieldId: true, taskEnumId: true } }
+          taskEnumValues: { select: { value: true, taskFieldId: true } }
         }
       })
     } catch (error) {
@@ -102,7 +102,7 @@ export class TasksService {
             id: true, createdAt: true, name: true, description: true,
             taskIntValues: { select: { value: true, taskFieldId: true } },
             taskStrValues: { select: { value: true, taskFieldId: true } },
-            taskEnumValues: { select: { taskFieldId: true, taskEnumId: true } }
+            taskEnumValues: { select: { value: true, taskFieldId: true } }
           }
         }))
       )
