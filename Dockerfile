@@ -6,9 +6,9 @@ COPY package*.json ./
 
 COPY pnpm-lock.yaml ./
 
-RUN npm install
-
 RUN npm install -g pnpm
+
+RUN pnpm install
 
 COPY . .
 
@@ -16,4 +16,4 @@ COPY prisma ./prisma
 
 RUN npx prisma generate
 
-CMD [ "pnpm","run","start"]
+CMD source start.sh
